@@ -18,8 +18,8 @@ env:
  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
  # S3 bucket for the Terraform state
  BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
- AWS_REGION: us-east-2
- EKS_CLUSTER: vprofile-eks
+ AWS_REGION: us-east-1
+ EKS_CLUSTER: vprofile-gitops-krunky
 
 jobs:
    terraform:
@@ -66,7 +66,7 @@ jobs:
          run: terraform apply -auto-approve -input=false -parallelism=1 planfile
 
        - name: Configure AWS credentials
-         uses: aws-actions/configure-aws-credentials@v1
+         uses: aws-actions/configure-aws-credentials@v4
          with:
            aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
            aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
